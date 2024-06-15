@@ -41,8 +41,10 @@ export function Creater({children}){
         d.forEach((v)=>{
             v.disabled=false
         })
+        setMarks("")
+        disp({type:"nothing"})
     }
-    console.log(seleStore)
+    console.log(seleb)
     return(
 
         <>
