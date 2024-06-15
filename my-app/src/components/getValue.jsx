@@ -10,10 +10,12 @@ export function fetchData(a,setLog,setVal){
       })
 }
 
-export function display(disp){
-    fetch("https://dbioz2ek0e.execute-api.ap-south-1.amazonaws.com/mockapi/get-quiz").
-    then((res)=>res.json()).
-    then((res)=>{
-        disp({type:"All",payload:res.data})
-    })
+export let display=async(disp)=>{
+    try{
+      let a= await fetch("https://dbioz2ek0e.execute-api.ap-south-1.amazonaws.com/mockapi/get-quiz")
+      let b=await a.json()
+      disp({type:"All",payload:b.data})
+    }catch(er){
+      console.log(console.log(er))
+    }
 }

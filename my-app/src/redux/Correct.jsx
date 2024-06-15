@@ -5,6 +5,6 @@ export function correct(state=b,action){
         case "All":
             return {...state,data:action.payload}
         default:
-            return b
+            return state
     }
 }

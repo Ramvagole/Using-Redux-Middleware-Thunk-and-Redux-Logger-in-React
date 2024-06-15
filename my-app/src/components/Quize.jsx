@@ -1,7 +1,7 @@
 import { useContext } from "react"
 import { data } from "./Creater"
 export function Quize(){
-    let {seleStore,c,setCheck,score,marks}=useContext(data)
+    let {disp,seleStore,score,marks,reset}=useContext(data)
     return(
         <>
 
@@ -16,7 +16,7 @@ export function Quize(){
                             return(
                                 <>
                                 <div key={p} style={{textAlign:"justify"}}>
-                                    <input type="radio" value={p} name={v.id} onChange={(e)=>setCheck({...c,[e.target.name]:e.target.value})}/>
+                                    <input className="right" type="radio" value={p} name={v.id} onChange={(e)=>disp({type:"Submit",id:e.target.name,payload:e.target.value})}/>
                                     <label>{f}</label>
                                 </div>
                                 
@@ -24,13 +24,14 @@ export function Quize(){
                             )
                         })
                     }
-                    {(marks)?<h2 style={{color:"green"}}>Answer:{v.options[v.correctOptionIndex]}</h2>:""}
+                    {(marks)?<h1 style={{color:"green"}}>Answer:{v.options[v.correctOptionIndex]}</h1>:""}
                 </div>
                )
             })
         }
         <button onClick={score}>Submit</button>
         <h1>Score:{marks}</h1>
+        {(marks)?<button onClick={reset}>Reset</button>:""}
         </>
     )
 }

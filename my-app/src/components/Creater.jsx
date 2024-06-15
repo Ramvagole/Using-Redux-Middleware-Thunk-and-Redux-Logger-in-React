@@ -5,7 +5,7 @@ export let data=createContext()
 export function Creater({children}){
     let [a,setVal]=useState({email:"",password:""})
     let [log,setLog]=useState(null)
-    let [c,setCheck]=useState({})
+    
     let [marks,setMarks]=useState("")
     let seleStore=useSelector(state=>state.valueStore)
     let seleb=useSelector(state=>state.b)
@@ -15,26 +15,39 @@ export function Creater({children}){
         fetchData(a,setLog,setVal)
     }
     useEffect(()=>{
-        display(disp)
+        disp(display)
     },[])
     function score(){
-        let b=seleStore.data.map((v,i)=>{
-            return {correctOptionIndex:v.correctOptionIndex,id:v.id}
-        })
-        console.log(b)
         let k=seleStore.data.filter((v)=>{
-            return (v.correctOptionIndex==c[v.id])
+            return (v.correctOptionIndex===Number(seleb[v.id]))
         })
-        console.log(k)
         let marks=k.length
         setMarks(marks)
+        let a=document.getElementsByClassName("right")
+        let b=Array.from(a)
+        b.forEach((v)=>{
+            v.disabled=true
+        })
     }
-    console.log(c)
+    function reset(){
+        disp({type:"no"})
+        let a=document.getElementsByClassName("right")
+        let b=Array.from(a)
+        b.forEach((v)=>{
+            v.checked=false
+        })
+        let c=document.getElementsByClassName("right")
+        let d=Array.from(c)
+        d.forEach((v)=>{
+            v.disabled=false
+        })
+    }
+    console.log(seleStore)
     return(
 
         <>
         
-        <data.Provider value={{disp,seleStore,seleb,a,setVal,submit,log,c,setCheck,score,marks}}>
+        <data.Provider value={{disp,seleStore,seleb,a,setVal,submit,log,marks,score,reset}}>
             {children}
         </data.Provider>
         </>

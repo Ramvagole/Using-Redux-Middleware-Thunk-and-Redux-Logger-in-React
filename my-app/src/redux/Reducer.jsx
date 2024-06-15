@@ -5,6 +5,6 @@ export function reducer(state=a,action){
         case "Submit":
             return {...state,[action.id]:action.payload}
         default:
-            return state
+            return {}
     }
 }
